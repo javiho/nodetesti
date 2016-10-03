@@ -1,0 +1,35 @@
+{
+    "weeks": [
+        {
+            "span": {
+                "firstDate": 315446400000,
+                "lastDate": 315964800000,
+                "firstDateAltForm": "1979-12-31T00:00:00.000Z",
+                "lastDateAltForm": "1980-01-06T00:00:00.000Z"
+            },
+            "note": "ensimmäinen muistiinpano"
+        },
+        {
+            "span": {
+                "firstDate": 317865600000,
+                "lastDate": 318384000000,
+                "firstDateAltForm": "1980-01-28T00:00:00.000Z",
+                "lastDateAltForm": "1980-02-03T00:00:00.000Z"
+            },
+            "note": "tammikuun viimeinen"
+        },
+        {
+            "span": {
+                "firstDate": 337820400000,
+                "lastDate": 338338800000,
+                "firstDateAltForm": "1980-09-14T23:00:00.000Z",
+                "lastDateAltForm": "1980-09-20T23:00:00.000Z"
+            },
+            "note": "Tänään on maanantai 15. päivä."
+        }
+    ],
+    "bd": 315446400000,
+    "dd": 346809600000,
+    "bdAltForm": "1979-12-31T00:00:00.000Z",
+    "ddAltForm": "1980-12-28T00:00:00.000Z"
+}

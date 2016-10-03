@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+    p asdf
+  
+    table
+        tr
+            th ensimmäinen teksti
+            th toinen teksti
+            th optionaalinen teksti
+        tr
+            td asdf
+            td fdsa
+            td qwer
+        tr
+            td asdas
+            td öölölkl
+            
+    div#calendar
+    div(data-lol='lel') aaaa
+    p Syntymäpäivä:
+        input(id='birthday-picker', type='date')
+    p Arvioitu kuolinpäivä:
+        input(id='death-day-picker', type='date')
+    button(id='save-button', type='button') Tallenna
+    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js')
+    script(src='/javascripts/calendar_view_main.js')
+    //script(src='/asdsdsaösadlldald.js')
+    //script(src='/javascripts/table_creation.js')
+    
