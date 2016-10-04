@@ -329,7 +329,7 @@ function fillMissingWeeks(existingWeeks, newFirstDate, newLastDate){
     //console.log("newFirstDate: " + newFirstDate);
     //console.log("newLastDate: " + newLastDate);
     console.assert(gtae(existingWeeks));
-    for(var d = newFirstDate; !df.isNextWeekTooLate(d, newLastDate); d = df.incrementDate(d, 7)){
+    for(var d = newFirstDate; !df.isAfterWeek(d, newLastDate); d = df.incrementDate(d, 7)){
         //console.log(d + " ei ollut liian myöhään");
         if(containsWeekForDate(existingWeeks, d)){
             //console.log("contains week of " + d);

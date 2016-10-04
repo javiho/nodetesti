@@ -13,10 +13,8 @@
 //    incrementDate: incrementDate
 //};
 
-var t = "asdf";
-
 /*
-* Only considers days, not times. For instance, 01:00 in last day of the week is after the week.
+* Only considers days, not times.
 * @param {Date} date
 * @param {Date} weekStartDate
 * @returns {boolean}
@@ -26,8 +24,13 @@ var isAfterWeek = function(date, weekStartDate){
    if(!isMonday(firstDay)){
        firstDay = getMonday(firstDay);
    }
-   var lastDay = incrementDate(date, 6);
-   return date.getTime() > lastDay.getTime();
+   //console.log("firstDay: " + firstDay);
+   var lastDay = incrementDate(firstDay, 6);
+   lastDay.setHours(0, 0, 0, 0);
+   date.setHours(0, 0, 0, 0);
+   //console.log("is after week: " + date + " lastDay " + lastDay +
+   //        "; " + date.getTime() + ", " + lastDay.getTime() + " -> " + (date.getTime() > lastDay.getTime()));
+   return (date.getTime() > lastDay.getTime());
 };
 
 var msToDate = function(ms){
@@ -57,16 +60,20 @@ var getSpanLastDateMilliseconds = function(firstDateMs, spanDays){
 * ENTÄ JOS HALUTAAN, ETTÄ SUNNUNTAI ON ENSIMMÄINEN VIIKONPÄIVÄ?
 */
 var getMonday = function(date){
-   var mondayCandidate = new Date(date);
-   while(true){
-       if(isMonday(mondayCandidate)){
-           return mondayCandidate;
-       }
-       mondayCandidate = incrementDate(mondayCandidate);
-   }
+    //console.log("date: " + date);
+    var mondayCandidate = new Date(date);
+    while(true){
+        if(isMonday(mondayCandidate)){
+            //console.log("monday : " + mondayCandidate);
+            return mondayCandidate;
+        }
+        //console.log(mondayCandidate + "was not monday");
+        mondayCandidate = incrementDate(mondayCandidate, -1);
+    }
 };
 
 var isMonday = function(date){
+    //console.log("isMonday: " + date + ": " + (date.getDay() === 1));
     return date.getDay() === 1;
 };
 
