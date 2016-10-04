@@ -326,8 +326,8 @@ function fillMissingWeeks(existingWeeks, newFirstDate, newLastDate){
     console.assert(gtae(existingWeeks, newFirstDate, newLastDate));
     var fullWeekArray = [];
     var existingW;
-    //console.log("newFirstDate: " + newFirstDate);
-    //console.log("newLastDate: " + newLastDate);
+    console.log("newFirstDate: " + newFirstDate);
+    console.log("newLastDate: " + newLastDate);
     console.assert(gtae(existingWeeks));
     for(var d = newFirstDate; !df.isAfterWeek(d, newLastDate); d = df.incrementDate(d, 7)){
         //console.log(d + " ei ollut liian myöhään");
