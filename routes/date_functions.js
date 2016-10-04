@@ -24,12 +24,12 @@ var isAfterWeek = function(date, weekStartDate){
    if(!isMonday(firstDay)){
        firstDay = getMonday(firstDay);
    }
-   //console.log("firstDay: " + firstDay);
+   console.log("firstDay: " + firstDay);
    var lastDay = incrementDate(firstDay, 6);
-   lastDay.setHours(0, 0, 0, 0);
-   date.setHours(0, 0, 0, 0);
-   //console.log("is after week: " + date + " lastDay " + lastDay +
-   //        "; " + date.getTime() + ", " + lastDay.getTime() + " -> " + (date.getTime() > lastDay.getTime()));
+   lastDay = getTimelessDate(lastDay);
+   date = getTimelessDate(date);
+   console.log("is after week: " + date + " lastDay " + lastDay +
+           "; " + date.getTime() + ", " + lastDay.getTime() + " -> " + (date.getTime() > lastDay.getTime()));
    return (date.getTime() > lastDay.getTime());
 };
 
@@ -94,6 +94,15 @@ var incrementDate = function(date, days){
     }
     var newDate = new Date(date);
     newDate.setDate(newDate.getDate() + days);
+    return newDate;
+};
+
+/*
+ * Return value: copy of date with time of 00:00:00.000.
+ */
+var getTimelessDate = function(date){
+    var newDate = new Date(date);
+    newDate.setHours(0, 0, 0, 0);
     return newDate;
 };
 
