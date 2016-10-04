@@ -24,12 +24,12 @@ var isAfterWeek = function(date, weekStartDate){
    if(!isMonday(firstDay)){
        firstDay = getMonday(firstDay);
    }
-   console.log("firstDay: " + firstDay);
+   //console.log("firstDay: " + firstDay);
    var lastDay = incrementDate(firstDay, 6);
    lastDay = getTimelessDate(lastDay);
    date = getTimelessDate(date);
-   console.log("is after week: " + date + " lastDay " + lastDay +
-           "; " + date.getTime() + ", " + lastDay.getTime() + " -> " + (date.getTime() > lastDay.getTime()));
+   //console.log("is after week: " + date + " lastDay " + lastDay +
+   //        "; " + date.getTime() + ", " + lastDay.getTime() + " -> " + (date.getTime() > lastDay.getTime()));
    return (date.getTime() > lastDay.getTime());
 };
 

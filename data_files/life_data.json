@@ -26,6 +26,15 @@
                 "lastDateAltForm": "1980-09-20T23:00:00.000Z"
             },
             "note": "Tänään on maanantai 15. päivä."
+        },
+        {
+            "span": {
+                "firstDate": 346291200000,
+                "lastDate": 346809600000,
+                "firstDateAltForm": "1980-12-22T00:00:00.000Z",
+                "lastDateAltForm": "1980-12-28T00:00:00.000Z"
+            },
+            "note": "Tällä viikolla on joulu"
         }
     ],
     "bd": 315446400000,

@@ -125,7 +125,7 @@ function toLargeFormat(weeks){
  * @returns {undefined}
  */
 function weekToLargeFormat(week){
-    var lastDateMs = getSpanLastDateMilliseconds(week.firstDate, 7);
+    var lastDateMs = df.getSpanLastDateMilliseconds(week.firstDate, 7);
     return {span:{firstDate:week.firstDate, lastDate:lastDateMs}, note:week.note};
 }
 
@@ -238,7 +238,7 @@ function preprocessLdForClient(dataJson){
     weeks = removeOutsideWeeks(weeks, bdAsDate, ddAsDate);
     //console.log("weeks.length: " + weeks.length);
     console.assert(gtae(weeks));
-    //console.log("weeks ennen täyttöä: " + JSON.stringify(weeks, null, 2));
+    console.log("weeks ennen täyttöä: " + JSON.stringify(weeks, null, 2));
     weeks = fillMissingWeeks(weeks, bdAsDate, ddAsDate);
     ld.weeks = weeks;
     var ldString = JSON.stringify(ld);
@@ -276,10 +276,10 @@ function removeOutsideWeeks(weeks, bd, dd){
     //loppuindeksi: 3
     
     //determine first index
-    if(bdLocation.isBefore){
+    if(bdLocation.isBeforeArray){
         firstIndex = 0;
-    }else if(bdLocation.isAfter){
-        //console.log("removeOutsideWeeks: syntymä on kaikkien jälkeen");
+    }else if(bdLocation.isAfterArray){
+        console.log("removeOutsideWeeks: syntymä on kaikkien jälkeen");
         return emptyArray;
     }else if(bdLocation.isInArray){
         firstIndex = bdLocation.index;
@@ -290,13 +290,15 @@ function removeOutsideWeeks(weeks, bd, dd){
     }
     
     //determine last index
-    if(ddLocation.isBefore){
+    //console.log("ddLocation: " + JSON.stringify(ddLocation));
+    if(ddLocation.isBeforeArray){
         //console.log("removeOutsideWeeks: kuolema on kaikkia ennen");
         return emptyArray;
-    }else if(ddLocation.isAfter){
+    }else if(ddLocation.isAfterArray){
+        //console.log("dd on taulukon jälkeen");
         lastIndex = weeks.length - 1;
     }else if(ddLocation.isInArray){
-        lastIndex = bdLocation.index;
+        lastIndex = ddLocation.index;
     }else if(ddLocation.isBetweenIndices){
         lastIndex = ddLocation.betweenIndices.beforeIndex;
     }else{
