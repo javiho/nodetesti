@@ -61,8 +61,9 @@ router.post('/', function(req, res){
     //console.log("a first date: " + req.body.weeks[0].firstDate);
     //console.log("tässä");
     var newLifeData = req.body;
-    saveLifeData(newLifeData);
-    res.send("serverin vastaus");
+    saveLifeData(newLifeData, function(){
+        res.send("serverin vastaus");
+    });
 });
 
 module.exports = router;
@@ -74,7 +75,7 @@ var spanLength = 7;
  * @param {object} rawLifeData - as it is sent by client (MERKKIJONO VAI OBJEKTI????)
  * @returns {undefined}
  */
-function saveLifeData(rawLifeData){
+function saveLifeData(rawLifeData, savedCallback){
 //RAJATAPAUKSET??
     //newWeeks are weeks form the client
     var newWeeks = rawLifeData.weeks;
@@ -98,9 +99,13 @@ function saveLifeData(rawLifeData){
             //console.log("existing weeks:" + JSON.stringify(obj, null, 4));
             var beforePart = getWeeksBefore(existingWeeks, firstRawWeekMs);
             var afterPart = getWeeksAfter(existingWeeks, lastRawWeekMs);
-            finalArray = beforePart.concat(newWeeks).concat(afterPart);
+            //console.log("after part: " + JSON.stringify(afterPart));
+            //VAIN NE PITÄÄ LIITTÄÄ, JOTKA EIVTÄ OLE UNDEFINED
+            var nonUndefinedArrays = [beforePart, newWeeks, afterPart].filter(gtae);
+            finalArray = [].concat.apply([], nonUndefinedArrays);
         }
-        saveLdAsJson(finalArray, newBd, newDd);
+        //console.log("final array: " + JSON.stringify(finalArray));
+        saveLdAsJson(finalArray, newBd, newDd, savedCallback);
     });
 }
 
@@ -185,7 +190,7 @@ function getWeeksAfter(weeks, time){
  * @param {Date} dd
  * @returns {}
  */
-function saveLdAsJson(weeksArray, bd, dd){
+function saveLdAsJson(weeksArray, bd, dd, doneCallback){
     var final = {};
     final.weeks = weeksArray;
     final.bd = bd;
@@ -199,7 +204,7 @@ function saveLdAsJson(weeksArray, bd, dd){
     final.bdAltForm = msToDate(final.bd);
     final.ddAltForm = msToDate(final.dd);
     var finalString = JSON.stringify(final, null, 4);
-    ldFileIo.writeLifeFile(finalString);
+    ldFileIo.writeLifeFile(finalString, doneCallback);
 }
 
 //TESTAUSTA VARTEN
@@ -238,11 +243,11 @@ function preprocessLdForClient(dataJson){
     weeks = removeOutsideWeeks(weeks, bdAsDate, ddAsDate);
     //console.log("weeks.length: " + weeks.length);
     console.assert(gtae(weeks));
-    console.log("weeks ennen täyttöä: " + JSON.stringify(weeks, null, 2));
+    //console.log("weeks ennen täyttöä: " + JSON.stringify(weeks, null, 2));
     weeks = fillMissingWeeks(weeks, bdAsDate, ddAsDate);
     ld.weeks = weeks;
     var ldString = JSON.stringify(ld);
-    console.log("viimeinen viikko asiakkaalle: " + msToDate(weeks[weeks.length - 1].span.firstDate));
+    //console.log("viimeinen viikko asiakkaalle: " + msToDate(weeks[weeks.length - 1].span.firstDate));
     console.log("asiakkaalle lähetetään: " + ldString);
     return ldString;
 }
@@ -457,16 +462,20 @@ function getLocationOfDateRelativeToArray(weekArray, date){
     var arrayLastDate = weekArray[weekArray.length - 1].span.lastDate;
     if(arrayFirstDate <= dateMs && dateMs <= arrayLastDate){
         isInArraySpan = true;
-    }else if(dateMs <= arrayFirstDate){
+    }else if(dateMs < arrayFirstDate){
         isBeforeArray = true;
-    }else if(dateMs >= arrayLastDate){
+    }else if(dateMs > arrayLastDate){
         isAfterArray = true;
     }else{
         throw "Error.";
     }   
     if(!isInArraySpan){
-        result.isBefore = isBeforeArray;
-        result.isAfter = isAfterArray;
+        result.isBeforeArray = isBeforeArray;
+        result.isAfterArray = isAfterArray;
+//        console.log("on talukkoa ennen tai jälkeen, palataan");
+//        console.log("arrayFirstDate <= dateMs && dateMs <= arrayLastDate: " + (arrayFirstDate <= dateMs && dateMs <= arrayLastDate));
+//        console.log("dateMs < arrayFirstDate: " + (dateMs < arrayFirstDate));
+//        console.log("dateMs > arrayLastDate: " + (dateMs > arrayLastDate));
         return result;
     }
     
@@ -484,6 +493,7 @@ function getLocationOfDateRelativeToArray(weekArray, date){
             result.isInArray = true;
             result.index = i;
             //console.log("indeksi: " + index);
+            //console.log("on taulussa, palataan");
             return result;
         }
     }
@@ -499,6 +509,7 @@ function getLocationOfDateRelativeToArray(weekArray, date){
                 if(isBeforeWeek(nextWeek, date)){
                     result.isBetweenIndices = true;
                     result.betweenIndices = {beforeIndex:i, afterIndex:i + 1};
+                    //console.log("on välissä, palataan");
                     return result;
                 }
             }

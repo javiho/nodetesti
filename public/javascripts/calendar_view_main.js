@@ -15,7 +15,8 @@ window.onload = function(){
 };
 
 /*
- * Removes the possible existing calendar table and creates a new one
+ * Removes the possible existing calendar table and creates a new one.
+ * Updates also date pickers.
  * @returns {undefined}
  */
 function updateCalendar(){
@@ -44,6 +45,7 @@ function sendCalendarData(calendarData){
         data:calendarData,
         success: function(dataFromServer){
             console.log("post data from server: " + dataFromServer);
+            updateCalendar();
         }
     });
 }
@@ -100,6 +102,7 @@ function parseServerData(weeksJSONString){
  */
 function createWeekCalendarDiv(weeks){
     var calendarDiv = document.getElementById("calendar");
+    murderChildren(calendarDiv);
     for(var i = 0; i < weeks.length; i++){
         var week = weeks[i];
         var weekDiv = document.createElement("div");
@@ -203,4 +206,13 @@ function getMinAndMaxWeek(calendarData){
 function setDateInputValue(dateInput, value){
     //12 LOPUSSA ON VÄLTTÄMÄTON, MUTTA MITÄ SE TEKEE?
     dateInput.valueAsDate = new Date(value.getFullYear(), value.getMonth(), value.getDate(), 12);
+}
+
+/*
+ * Removes child nodes of el.
+ */
+function murderChildren(el){
+    while(el.hasChildNodes()){
+        el.removeChild(el.lastChild);
+    }
 }
