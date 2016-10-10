@@ -1,1 +1,1 @@
-body{padding:50px;font:14px "Lucida Grande",Helvetica,Arial,sans-serif}a{color:#00B7FF}#calendar{border:1px solid black}#calendar>div{display:inline-block;width:150px;height:75px;margin:2px;border:1px solid black;background-color:#00ffff}
+body{padding:50px;font:14px "Lucida Grande",Helvetica,Arial,sans-serif}a{color:#00B7FF}.note-input{width:10em;height:2em}#calendar{border:1px solid black}#calendar>div{display:inline-block;width:10em;height:5em;margin:2px;border:1px solid black;background-color:#00ffff}

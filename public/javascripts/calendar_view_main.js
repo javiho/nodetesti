@@ -120,15 +120,16 @@ function createWeekCalendarDiv(weeks){
  * HUOM! dataset-attribuutin tilalla voisi käyttää getAttribute- ja setAttribute-funktioita,
  * koska datasettiä ei tueta monissa selaimissa (?)
  * Pre-condition: there isn't an HTML element with the id "ie(ordinalNumber)"
+ * Return value: text area element.
  */
 function createWeekTextBox(initialText, ordinalNumber, firstDateMs){
     var inputElement = document.createElement("textarea");
     //inputElement.type = "text";
     inputElement.value = initialText;
-    inputElement.class = "note-input";
+    inputElement.className = "note-input";
     inputElement.id = "ie" + ordinalNumber;
     //inputElement.setAttribute('data-milliseconds', firstDateMs);
-    inputElement.dataset.milliseconds = firstDateMs;
+    inputElement.dataset.milliseconds = firstDateMs; //MIHIN TÄTÄ TARVITAAN????
     inputElement.dataset.isWeekInput = true;
     //console.log("isWeekInput: " + inputElement.dataset.isWeekInput);
     //console.log("data-lol: " + $('[data-lol]')[0].dataset.lol);

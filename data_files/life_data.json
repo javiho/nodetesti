@@ -2,43 +2,25 @@
     "weeks": [
         {
             "span": {
-                "firstDate": 315446400000,
-                "lastDate": 315964800000,
-                "firstDateAltForm": "1979-12-31T00:00:00.000Z",
-                "lastDateAltForm": "1980-01-06T00:00:00.000Z"
+                "firstDate": 775699200000,
+                "lastDate": 776217600000,
+                "firstDateAltForm": "1994-08-01T00:00:00.000Z",
+                "lastDateAltForm": "1994-08-07T00:00:00.000Z"
             },
-            "note": "ensimmäinen muistiinpano"
+            "note": "nolikkä ei tähän  kauhean paljon mahdu"
         },
         {
             "span": {
-                "firstDate": 317865600000,
-                "lastDate": 318384000000,
-                "firstDateAltForm": "1980-01-28T00:00:00.000Z",
-                "lastDateAltForm": "1980-02-03T00:00:00.000Z"
+                "firstDate": 776304000000,
+                "lastDate": 776822400000,
+                "firstDateAltForm": "1994-08-08T00:00:00.000Z",
+                "lastDateAltForm": "1994-08-14T00:00:00.000Z"
             },
-            "note": "tammikuun viimeinen"
-        },
-        {
-            "span": {
-                "firstDate": 337820400000,
-                "lastDate": 338338800000,
-                "firstDateAltForm": "1980-09-14T23:00:00.000Z",
-                "lastDateAltForm": "1980-09-20T23:00:00.000Z"
-            },
-            "note": "Tänään on maanantai 15. päivä."
-        },
-        {
-            "span": {
-                "firstDate": 346291200000,
-                "lastDate": 346809600000,
-                "firstDateAltForm": "1980-12-22T00:00:00.000Z",
-                "lastDateAltForm": "1980-12-28T00:00:00.000Z"
-            },
-            "note": "Tällä viikolla on joulu"
+            "note": "notta sämmösta"
         }
     ],
-    "bd": 315446400000,
-    "dd": 352080000000,
-    "bdAltForm": "1979-12-31T00:00:00.000Z",
-    "ddAltForm": "1981-02-27T00:00:00.000Z"
+    "bd": 775699200000,
+    "dd": 2699222400000,
+    "bdAltForm": "1994-08-01T00:00:00.000Z",
+    "ddAltForm": "2055-07-15T00:00:00.000Z"
 }
