@@ -51,7 +51,8 @@ function sendCalendarData(calendarData){
 }
 
 /*
- * Creates an object based on the input elements' attributes.
+ * Creates an object based on the input elements' attributes. Ignores the
+ * input elements which don't have any text in them.
  * Return value: the following kind of object:
  * {
  * weeks:[{firstDate:(milliseconds), note:(text)},
@@ -65,10 +66,12 @@ function createCalendarDataObject(){
     //console.log("inputElements.length: " + inputElements.length);
     for(var i = 0; i < inputElements.length; i++){
         var ie = inputElements[i];
-        var fdMilliseconds = ie.getAttribute('data-milliseconds');
-        fdMilliseconds = parseInt(fdMilliseconds);
-        var wo = {firstDate:fdMilliseconds, note:ie.value};
-        weeks.push(wo);
+        if(ie.value !== ""){
+            var fdMilliseconds = ie.getAttribute('data-milliseconds');
+            fdMilliseconds = parseInt(fdMilliseconds);
+            var wo = {firstDate:fdMilliseconds, note:ie.value};
+            weeks.push(wo);
+        }
     }
     //console.log("createCalendarDataObject: weeks:");
     //console.log(weeks);
